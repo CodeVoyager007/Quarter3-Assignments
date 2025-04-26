@@ -1,48 +1,86 @@
-# CodeMentor - Interactive Programming Learning Platform
+# 🚀 CodeMentor
+**Interactive Programming Learning Platform**
 
-CodeMentor is an interactive learning platform designed to help beginners learn programming languages in a structured and engaging way. It provides lessons, challenges, and quizzes for multiple programming languages with different difficulty levels.
+---
 
-## Features
+## 🌟 Overview
 
-- Interactive lessons for Python, JavaScript, and Java
-- Three difficulty levels: Beginner, Intermediate, and Advanced
-- Practice challenges with instant feedback
-- Interactive quizzes to test your knowledge
-- Progress tracking
-- Beautiful and intuitive UI built with Streamlit
+**CodeMentor** is your all-in-one interactive platform to master programming!  
+Learn Python, JavaScript, and TypeScript through hands-on lessons, real coding challenges, and quizzes — all in a beautiful, intuitive interface.
 
-## Installation
+---
 
-1. Clone this repository
-2. Create a virtual environment using UV:
-```bash
-uv init codementor
-uv add streamlit
-uv add pandas
-uv add numpy
-```
+## ✨ Features
 
-3. Run the application:
-```bash
-streamlit run main.py
-```
+- 📚 **Lessons**: Step-by-step guides for Python, JavaScript, and TypeScript
+- 🏆 **Challenges**: Practice problems with instant feedback and hints
+- ❓ **Quizzes**: Test your knowledge at every level
+- 📈 **Progress Tracking**: See your growth as you learn
+- 📰 **Daily Tech Blogs**: Stay updated with the latest in tech
+- 💻 **Code Playground**: Write and run code in your browser
+- 🎯 **Interview Prep**: Practice with real-world interview questions
+- 🌐 **Free Courses**: Curated list of top free programming courses
 
-## Project Structure
+---
 
-- `main.py`: Main application entry point
-- `models/`: Contains OOP classes for lessons, challenges, and quizzes
-- `data/`: Contains lesson content and quiz questions
-- `utils/`: Helper functions and utilities
+## 🚀 Quick Start
 
-## How to Use
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/CodeVoyager/class6.git
+   cd codementor
+   ```
 
-1. Launch the application using the command above
-2. Select your preferred programming language
-3. Choose your difficulty level
-4. Start with lessons or jump straight to challenges
-5. Take quizzes to test your knowledge
-6. Track your progress as you learn
+2. **Install dependencies**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
 
-## Contributing
+3. **Run the app**
+   ```bash
+   streamlit run src/codementor/main.py
+   ```
 
-Feel free to contribute to this project by adding more lessons, challenges, or improving the existing content. 
+---
+
+
+
+---
+
+## 🧑‍💻 How to Use
+
+1. Launch the app with the command above.
+2. Choose your language and difficulty.
+3. Explore lessons, solve challenges, and take quizzes.
+4. Track your progress and try out the code playground.
+5. Check out daily blogs and free courses for extra learning!
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions!  
+- Add new lessons, challenges, or quizzes
+- Suggest new features or improvements
+- Report bugs or issues
+
+**To contribute:**
+1. Fork the repo
+2. Create a new branch (`git checkout -b feature/your-feature`)
+3. Commit your changes
+4. Open a pull request
+
+---
+
+## 📬 Contact
+
+Questions, suggestions, or feedback?  
+Open an issue or reach out at [ayeshamughal2162@gmail.com](mailto:ayeshamughal2162.com)
+
+---
+
+
+
+> **Happy Coding! 🚀** 
