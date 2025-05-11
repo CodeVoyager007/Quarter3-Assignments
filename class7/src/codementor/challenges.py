@@ -1,5 +1,5 @@
 import streamlit as st
-from data.challenges import PYTHON_CHALLENGES, JAVASCRIPT_CHALLENGES, TYPESCRIPT_CHALLENGES
+from data.challenges import PYTHON_CHALLENGES, JAVASCRIPT_CHALLENGES, TYPESCRIPT_CHALLENGES, NEXTJS_CHALLENGES
 
 class Challenge:
     def __init__(self, title: str, description: str, language: str, difficulty: str, solution: str, hint: str = None):
@@ -18,7 +18,8 @@ def get_challenges(language: str, difficulty: str):
     challenges_data = {
         'python': PYTHON_CHALLENGES,
         'javascript': JAVASCRIPT_CHALLENGES,
-        'typescript': TYPESCRIPT_CHALLENGES
+        'typescript': TYPESCRIPT_CHALLENGES,
+        'nextjs': NEXTJS_CHALLENGES
     }
     return [
         Challenge(**challenge_data)
@@ -27,7 +28,7 @@ def get_challenges(language: str, difficulty: str):
 
 def challenges_page():
     st.header("Challenges")
-    language = st.selectbox("Select Language", ["Python", "JavaScript", "TypeScript"], key="challenges_language")
+    language = st.selectbox("Select Language", ["Python", "JavaScript", "TypeScript", "Next.js"], key="challenges_language")
     difficulty = st.selectbox("Select Difficulty", ["Beginner", "Intermediate", "Advanced"], key="challenges_difficulty")
     st.subheader(f"{language} Challenges - {difficulty}")
     challenges = get_challenges(language.lower(), difficulty.lower())

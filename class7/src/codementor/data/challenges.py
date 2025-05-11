@@ -931,4 +931,253 @@ TYPESCRIPT_CHALLENGES = {
             'difficulty': 'advanced'
         }
     ]
+}
+
+NEXTJS_CHALLENGES = {
+    'beginner': [
+        {
+            'title': 'Create a Basic Next.js App',
+            'description': 'Create a new Next.js application using create-next-app and set up the basic project structure.',
+            'solution': 'npx create-next-app@latest my-app\ncd my-app\nnpm run dev',
+            'hint': 'Use the create-next-app command to bootstrap your application.',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'Create a Home Page',
+            'description': 'Create a home page component in the pages directory that displays a welcome message.',
+            'solution': '// pages/index.js\nexport default function Home() {\n  return <h1>Welcome to My Next.js App!</h1>\n}',
+            'hint': 'Create a new file in the pages directory and export a React component.',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'Add Navigation',
+            'description': 'Create a navigation bar component and add it to your layout.',
+            'solution': '// components/Navbar.js\nimport Link from "next/link";\n\nexport default function Navbar() {\n  return (\n    <nav>\n      <Link href="/">Home</Link>\n      <Link href="/about">About</Link>\n    </nav>\n  )\n}',
+            'hint': 'Use Next.js Link component for client-side navigation.',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'Create an About Page',
+            'description': 'Create an about page with some basic information about your application.',
+            'solution': '// pages/about.js\nexport default function About() {\n  return (\n    <div>\n      <h1>About Us</h1>\n      <p>This is our Next.js application.</p>\n    </div>\n  )\n}',
+            'hint': 'Create a new file in the pages directory for the about page.',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'Add CSS Styling',
+            'description': 'Add CSS styling to your Next.js application using CSS modules.',
+            'solution': '// styles/Home.module.css\n.container {\n  padding: 2rem;\n}\n\n// pages/index.js\nimport styles from "../styles/Home.module.css";\n\nexport default function Home() {\n  return <div className={styles.container}>Content</div>\n}',
+            'hint': 'Create a CSS module file and import it in your component.',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'Add Images',
+            'description': 'Use Next.js Image component to add optimized images to your application.',
+            'solution': '// pages/index.js\nimport Image from "next/image";\n\nexport default function Home() {\n  return (\n    <Image\n      src="/profile.jpg"\n      alt="Profile"\n      width={500}\n      height={300}\n    />\n  )\n}',
+            'hint': 'Use the Next.js Image component for optimized images.',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'Create a Layout',
+            'description': 'Create a layout component that wraps your pages.',
+            'solution': '// components/Layout.js\nexport default function Layout({ children }) {\n  return (\n    <div>\n      <Navbar />\n      <main>{children}</main>\n      <footer>Footer</footer>\n    </div>\n  )\n}',
+            'hint': 'Create a layout component that accepts children as props.',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'Add Meta Tags',
+            'description': 'Add meta tags to your pages using Next.js Head component.',
+            'solution': '// pages/index.js\nimport Head from "next/head";\n\nexport default function Home() {\n  return (\n    <>\n      <Head>\n        <title>My Next.js App</title>\n        <meta name="description" content="My Next.js application" />\n      </Head>\n      <h1>Home</h1>\n    </>\n  )\n}',
+            'hint': 'Use the Next.js Head component to add meta tags.',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'Create a Contact Form',
+            'description': 'Create a simple contact form with name and email fields.',
+            'solution': '// pages/contact.js\nexport default function Contact() {\n  return (\n    <form>\n      <input type="text" name="name" placeholder="Name" />\n      <input type="email" name="email" placeholder="Email" />\n      <button type="submit">Submit</button>\n    </form>\n  )\n}',
+            'hint': 'Create a form with basic input fields.',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'Add Environment Variables',
+            'description': 'Set up environment variables in your Next.js application.',
+            'solution': '// .env.local\nAPI_KEY=your_api_key\n\n// pages/index.js\nconsole.log(process.env.API_KEY);',
+            'hint': 'Create a .env.local file and access variables using process.env.',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        }
+    ],
+    'intermediate': [
+        {
+            'title': 'Create Dynamic Routes',
+            'description': 'Set up dynamic routing for blog posts using [id].js.',
+            'solution': '// pages/posts/[id].js\nexport default function Post({ post }) {\n  return (\n    <div>\n      <h1>{post.title}</h1>\n      <p>{post.content}</p>\n    </div>\n  )\n}\n\nexport async function getStaticProps({ params }) {\n  const post = await getPost(params.id);\n  return { props: { post } };\n}\n\nexport async function getStaticPaths() {\n  const posts = await getAllPosts();\n  return {\n    paths: posts.map(post => ({ params: { id: post.id } })),\n    fallback: false\n  };\n}',
+            'hint': 'Use getStaticProps and getStaticPaths for static generation.',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        },
+        {
+            'title': 'Implement API Routes',
+            'description': 'Create an API route to handle form submissions.',
+            'solution': '// pages/api/contact.js\nexport default function handler(req, res) {\n  if (req.method === "POST") {\n    const { name, email } = req.body;\n    // Process the data\n    res.status(200).json({ success: true });\n  } else {\n    res.status(405).json({ message: "Method not allowed" });\n  }\n}',
+            'hint': 'Create a file in the pages/api directory to handle API requests.',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        },
+        {
+            'title': 'Add Authentication',
+            'description': 'Implement authentication using NextAuth.js.',
+            'solution': '// pages/api/auth/[...nextauth].js\nimport NextAuth from "next-auth";\nimport Providers from "next-auth/providers";\n\nexport default NextAuth({\n  providers: [\n    Providers.Google({\n      clientId: process.env.GOOGLE_ID,\n      clientSecret: process.env.GOOGLE_SECRET,\n    }),\n  ],\n});',
+            'hint': 'Set up NextAuth.js with a provider like Google.',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        },
+        {
+            'title': 'Implement State Management',
+            'description': 'Add state management using Context API.',
+            'solution': '// context/ThemeContext.js\nimport { createContext, useState } from "react";\n\nexport const ThemeContext = createContext();\n\nexport function ThemeProvider({ children }) {\n  const [theme, setTheme] = useState("light");\n  return (\n    <ThemeContext.Provider value={{ theme, setTheme }}>\n      {children}\n    </ThemeContext.Provider>\n  );\n}',
+            'hint': 'Create a context provider for your state.',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        },
+        {
+            'title': 'Add Data Fetching',
+            'description': 'Implement data fetching using SWR.',
+            'solution': '// pages/posts.js\nimport useSWR from "swr";\n\nfunction Posts() {\n  const { data, error } = useSWR("/api/posts", fetcher);\n  if (error) return <div>Failed to load</div>;\n  if (!data) return <div>Loading...</div>;\n  return <div>{data.map(post => <div key={post.id}>{post.title}</div>)}</div>;\n}',
+            'hint': 'Use SWR for client-side data fetching.',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        },
+        {
+            'title': 'Implement Server-side Rendering',
+            'description': 'Create a page that uses server-side rendering.',
+            'solution': '// pages/ssr.js\nexport default function SSRPage({ data }) {\n  return <div>{data}</div>;\n}\n\nexport async function getServerSideProps() {\n  const data = await fetchData();\n  return { props: { data } };\n}',
+            'hint': 'Use getServerSideProps for server-side rendering.',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        },
+        {
+            'title': 'Add Error Handling',
+            'description': 'Implement custom error pages in Next.js.',
+            'solution': '// pages/404.js\nexport default function Custom404() {\n  return <h1>404 - Page Not Found</h1>;\n}\n\n// pages/_error.js\nexport default function Error({ statusCode }) {\n  return <h1>{statusCode} - An error occurred</h1>;\n}',
+            'hint': 'Create custom 404 and error pages.',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        },
+        {
+            'title': 'Implement Middleware',
+            'description': 'Create a middleware to handle authentication.',
+            'solution': '// middleware.js\nexport function middleware(request) {\n  if (!request.cookies.get("auth")) {\n    return NextResponse.redirect("/login");\n  }\n  return NextResponse.next();\n}\n\nexport const config = {\n  matcher: ["/dashboard/:path*"],\n};',
+            'hint': 'Create a middleware file to handle authentication.',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        },
+        {
+            'title': 'Add Internationalization',
+            'description': 'Implement internationalization using next-i18next.',
+            'solution': '// next-i18next.config.js\nmodule.exports = {\n  i18n: {\n    locales: ["en", "fr"],\n    defaultLocale: "en",\n  },\n};\n\n// pages/index.js\nimport { useTranslation } from "next-i18next";\n\nexport default function Home() {\n  const { t } = useTranslation();\n  return <h1>{t("welcome")}</h1>;\n}',
+            'hint': 'Set up next-i18next for internationalization.',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        },
+        {
+            'title': 'Implement API Rate Limiting',
+            'description': 'Add rate limiting to your API routes.',
+            'solution': '// pages/api/limited.js\nimport rateLimit from "express-rate-limit";\n\nconst limiter = rateLimit({\n  windowMs: 15 * 60 * 1000,\n  max: 100,\n});\n\nexport default function handler(req, res) {\n  limiter(req, res, () => {\n    // Your API logic here\n  });\n}',
+            'hint': 'Use express-rate-limit for API rate limiting.',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        }
+    ],
+    'advanced': [
+        {
+            'title': 'Implement Custom Server',
+            'description': 'Create a custom server with Express and Next.js.',
+            'solution': '// server.js\nconst express = require("express");\nconst next = require("next");\n\nconst dev = process.env.NODE_ENV !== "production";\nconst app = next({ dev });\nconst handle = app.getRequestHandler();\n\napp.prepare().then(() => {\n  const server = express();\n  server.all("*", (req, res) => handle(req, res));\n  server.listen(3000);\n});',
+            'hint': 'Create a custom server using Express and Next.js.',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'Implement WebSocket',
+            'description': 'Add WebSocket support to your Next.js application.',
+            'solution': '// pages/api/socket.js\nimport { Server } from "socket.io";\n\nconst ioHandler = (req, res) => {\n  if (!res.socket.server.io) {\n    const io = new Server(res.socket.server);\n    res.socket.server.io = io;\n    io.on("connection", socket => {\n      socket.on("message", msg => {\n        io.emit("message", msg);\n      });\n    });\n  }\n  res.end();\n};\n\nexport default ioHandler;',
+            'hint': 'Use socket.io to implement WebSocket functionality.',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'Implement GraphQL',
+            'description': 'Add GraphQL support using Apollo Client.',
+            'solution': '// lib/apollo-client.js\nimport { ApolloClient, InMemoryCache } from "@apollo/client";\n\nexport const client = new ApolloClient({\n  uri: "/api/graphql",\n  cache: new InMemoryCache(),\n});\n\n// pages/index.js\nimport { useQuery } from "@apollo/client";\nimport { GET_POSTS } from "../queries";\n\nfunction Posts() {\n  const { data } = useQuery(GET_POSTS);\n  return <div>{data?.posts.map(post => <div key={post.id}>{post.title}</div>)}</div>;\n}',
+            'hint': 'Set up Apollo Client for GraphQL support.',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'Implement Serverless Functions',
+            'description': 'Create serverless functions using Vercel.',
+            'solution': '// api/hello.js\nexport default function handler(req, res) {\n  res.status(200).json({ message: "Hello from serverless function!" });\n}',
+            'hint': 'Create serverless functions in the api directory.',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'Implement PWA',
+            'description': 'Convert your Next.js app to a Progressive Web App.',
+            'solution': '// next.config.js\nconst withPWA = require("next-pwa");\n\nmodule.exports = withPWA({\n  pwa: {\n    dest: "public",\n    register: true,\n    skipWaiting: true,\n  },\n});',
+            'hint': 'Use next-pwa to implement PWA features.',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'Implement SEO',
+            'description': 'Add advanced SEO features to your Next.js application.',
+            'solution': '// components/SEO.js\nimport Head from "next/head";\n\nexport default function SEO({ title, description }) {\n  return (\n    <Head>\n      <title>{title}</title>\n      <meta name="description" content={description} />\n      <meta property="og:title" content={title} />\n      <meta property="og:description" content={description} />\n    </Head>\n  );\n}',
+            'hint': 'Create a reusable SEO component.',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'Implement Testing',
+            'description': 'Add testing to your Next.js application using Jest and React Testing Library.',
+            'solution': '// tests/Home.test.js\nimport { render, screen } from "@testing-library/react";\nimport Home from "../pages/index";\n\ntest("renders home page", () => {\n  render(<Home />);\n  expect(screen.getByText("Welcome")).toBeInTheDocument();\n});',
+            'hint': 'Set up Jest and React Testing Library for testing.',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'Implement CI/CD',
+            'description': 'Set up continuous integration and deployment for your Next.js app.',
+            'solution': '// .github/workflows/ci.yml\nname: CI\n\non: [push, pull_request]\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v2\n      - uses: actions/setup-node@v2\n      - run: npm install\n      - run: npm run build\n      - run: npm run test',
+            'hint': 'Create GitHub Actions workflow for CI/CD.',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'Implement Performance Monitoring',
+            'description': 'Add performance monitoring to your Next.js application.',
+            'solution': '// pages/_app.js\nimport { useEffect } from "react";\nimport { useRouter } from "next/router";\n\nexport default function App({ Component, pageProps }) {\n  const router = useRouter();\n  useEffect(() => {\n    const handleRouteChange = (url) => {\n      // Send pageview to analytics\n    };\n    router.events.on("routeChangeComplete", handleRouteChange);\n    return () => {\n      router.events.off("routeChangeComplete", handleRouteChange);\n    };\n  }, [router.events]);\n  return <Component {...pageProps} />;\n}',
+            'hint': 'Use router events to monitor performance.',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'Implement Security Headers',
+            'description': 'Add security headers to your Next.js application.',
+            'solution': '// next.config.js\nmodule.exports = {\n  async headers() {\n    return [\n      {\n        source: "/(.*)",\n        headers: [\n          {\n            key: "X-Content-Type-Options",\n            value: "nosniff",\n          },\n          {\n            key: "X-Frame-Options",\n            value: "DENY",\n          },\n        ],\n      },\n    ];\n  },\n};',
+            'hint': 'Configure security headers in next.config.js.',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        }
+    ]
 } 

@@ -898,434 +898,6 @@ for (const item of arr) {
     ]
 }
 
-JAVA_LESSONS = {
-    'beginner': [
-        {
-            'title': 'Introduction to Java',
-            'content': '''
-            Java is a class-based, object-oriented programming language.
-            It is designed to be platform-independent and secure.
-            
-            Key Features:
-            - Write Once, Run Anywhere (WORA)
-            - Strong type checking
-            - Automatic memory management
-            - Rich standard library
-            
-            Example:
-            ```java
-            public class HelloWorld {
-                public static void main(String[] args) {
-                    System.out.println("Hello, World!");
-                }
-            }
-            ```
-            ''',
-            'language': 'java',
-            'difficulty': 'beginner'
-        },
-        {
-            'title': 'Variables and Data Types',
-            'content': '''
-            Java is a statically-typed language.
-            
-            Primitive Types:
-            - byte
-            - short
-            - int
-            - long
-            - float
-            - double
-            - char
-            - boolean
-            
-            Example:
-            ```java
-            int age = 25;
-            double price = 19.99;
-            char grade = 'A';
-            boolean isStudent = true;
-            ```
-            ''',
-            'language': 'java',
-            'difficulty': 'beginner'
-        },
-        {
-            'title': 'Operators and Expressions',
-            'content': '''
-            Java supports various operators.
-            
-            Arithmetic Operators:
-            ```java
-            int x = 10;
-            int y = 5;
-            System.out.println(x + y);  // 15
-            System.out.println(x - y);  // 5
-            System.out.println(x * y);  // 50
-            System.out.println(x / y);  // 2
-            ```
-            
-            Comparison Operators:
-            ```java
-            System.out.println(10 > 5);   // true
-            System.out.println(10 == 10); // true
-            ```
-            ''',
-            'language': 'java',
-            'difficulty': 'beginner'
-        },
-        {
-            'title': 'Control Flow',
-            'content': '''
-            Java provides several control flow statements.
-            
-            if-else:
-            ```java
-            if (age >= 18) {
-                System.out.println("Adult");
-            } else {
-                System.out.println("Minor");
-            }
-            ```
-            
-            switch:
-            ```java
-            switch(day) {
-                case "Monday":
-                    System.out.println("Start of week");
-                    break;
-                case "Friday":
-                    System.out.println("End of week");
-                    break;
-                default:
-                    System.out.println("Mid week");
-            }
-            ```
-            ''',
-            'language': 'java',
-            'difficulty': 'beginner'
-        },
-        {
-            'title': 'Loops',
-            'content': '''
-            Java provides several types of loops.
-            
-            for loop:
-            ```java
-            for (int i = 0; i < 5; i++) {
-                System.out.println(i);
-            }
-            ```
-            
-            while loop:
-            ```java
-            int i = 0;
-            while (i < 5) {
-                System.out.println(i);
-                i++;
-            }
-            ```
-            
-            for-each loop:
-            ```java
-            int[] numbers = {1, 2, 3};
-            for (int number : numbers) {
-                System.out.println(number);
-            }
-            ```
-            ''',
-            'language': 'java',
-            'difficulty': 'beginner'
-        }
-    ],
-    'intermediate': [
-        {
-            'title': 'Classes and Objects',
-            'content': '''
-            Java is an object-oriented language.
-            
-            Class Definition:
-            ```java
-            public class Person {
-                private String name;
-                private int age;
-                
-                public Person(String name, int age) {
-                    this.name = name;
-                    this.age = age;
-                }
-                
-                public void greet() {
-                    System.out.println("Hello, I'm " + name);
-                }
-            }
-            ```
-            ''',
-            'language': 'java',
-            'difficulty': 'intermediate'
-        },
-        {
-            'title': 'Inheritance and Polymorphism',
-            'content': '''
-            Java supports inheritance and polymorphism.
-            
-            Inheritance:
-            ```java
-            class Animal {
-                public void makeSound() {
-                    System.out.println("Some sound");
-                }
-            }
-            
-            class Dog extends Animal {
-                @Override
-                public void makeSound() {
-                    System.out.println("Woof!");
-                }
-            }
-            ```
-            ''',
-            'language': 'java',
-            'difficulty': 'intermediate'
-        },
-        {
-            'title': 'Interfaces and Abstract Classes',
-            'content': '''
-            Interfaces and abstract classes provide abstraction.
-            
-            Interface:
-            ```java
-            interface Drawable {
-                void draw();
-            }
-            
-            class Circle implements Drawable {
-                public void draw() {
-                    System.out.println("Drawing circle");
-                }
-            }
-            ```
-            
-            Abstract Class:
-            ```java
-            abstract class Shape {
-                abstract void draw();
-                
-                void move() {
-                    System.out.println("Moving shape");
-                }
-            }
-            ```
-            ''',
-            'language': 'java',
-            'difficulty': 'intermediate'
-        },
-        {
-            'title': 'Exception Handling',
-            'content': '''
-            Java uses try-catch blocks for exception handling.
-            
-            Basic Exception Handling:
-            ```java
-            try {
-                int result = 10 / 0;
-            } catch (ArithmeticException e) {
-                System.out.println("Cannot divide by zero!");
-            }
-            ```
-            
-            Multiple Exceptions:
-            ```java
-            try {
-                // code that might throw exceptions
-            } catch (IOException | SQLException e) {
-                System.out.println("Error occurred: " + e.getMessage());
-            }
-            ```
-            ''',
-            'language': 'java',
-            'difficulty': 'intermediate'
-        },
-        {
-            'title': 'Collections Framework',
-            'content': '''
-            Java provides a rich collections framework.
-            
-            List:
-            ```java
-            List<String> names = new ArrayList<>();
-            names.add("John");
-            names.add("Alice");
-            ```
-            
-            Map:
-            ```java
-            Map<String, Integer> ages = new HashMap<>();
-            ages.put("John", 25);
-            ages.put("Alice", 30);
-            ```
-            
-            Set:
-            ```java
-            Set<String> uniqueNames = new HashSet<>();
-            uniqueNames.add("John");
-            uniqueNames.add("Alice");
-            ```
-            ''',
-            'language': 'java',
-            'difficulty': 'intermediate'
-        }
-    ],
-    'advanced': [
-        {
-            'title': 'Generics',
-            'content': '''
-            Generics provide type safety and code reuse.
-            
-            Generic Class:
-            ```java
-            class Box<T> {
-                private T content;
-                
-                public void setContent(T content) {
-                    this.content = content;
-                }
-                
-                public T getContent() {
-                    return content;
-                }
-            }
-            ```
-            
-            Generic Methods:
-            ```java
-            public <T> void printArray(T[] array) {
-                for (T element : array) {
-                    System.out.println(element);
-                }
-            }
-            ```
-            ''',
-            'language': 'java',
-            'difficulty': 'advanced'
-        },
-        {
-            'title': 'Multithreading',
-            'content': '''
-            Java supports concurrent programming through threads.
-            
-            Thread Creation:
-            ```java
-            class MyThread extends Thread {
-                public void run() {
-                    System.out.println("Thread running");
-                }
-            }
-            
-            // Using Runnable
-            Thread thread = new Thread(() -> {
-                System.out.println("Thread running");
-            });
-            ```
-            
-            Synchronization:
-            ```java
-            synchronized void increment() {
-                count++;
-            }
-            ```
-            ''',
-            'language': 'java',
-            'difficulty': 'advanced'
-        },
-        {
-            'title': 'Streams and Lambda Expressions',
-            'content': '''
-            Java 8 introduced functional programming features.
-            
-            Stream Operations:
-            ```java
-            List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
-            
-            // Filter
-            List<Integer> evens = numbers.stream()
-                .filter(n -> n % 2 == 0)
-                .collect(Collectors.toList());
-            
-            // Map
-            List<Integer> squares = numbers.stream()
-                .map(n -> n * n)
-                .collect(Collectors.toList());
-            ```
-            ''',
-            'language': 'java',
-            'difficulty': 'advanced'
-        },
-        {
-            'title': 'Reflection',
-            'content': '''
-            Reflection allows runtime inspection of classes.
-            
-            Example:
-            ```java
-            Class<?> clazz = MyClass.class;
-            
-            // Get methods
-            Method[] methods = clazz.getDeclaredMethods();
-            
-            // Get fields
-            Field[] fields = clazz.getDeclaredFields();
-            
-            // Create instance
-            Object instance = clazz.newInstance();
-            ```
-            ''',
-            'language': 'java',
-            'difficulty': 'advanced'
-        },
-        {
-            'title': 'Design Patterns',
-            'content': '''
-            Common Java design patterns.
-            
-            Singleton:
-            ```java
-            public class Singleton {
-                private static Singleton instance;
-                
-                private Singleton() {}
-                
-                public static Singleton getInstance() {
-                    if (instance == null) {
-                        instance = new Singleton();
-                    }
-                    return instance;
-                }
-            }
-            ```
-            
-            Factory:
-            ```java
-            interface Shape {
-                void draw();
-            }
-            
-            class ShapeFactory {
-                public Shape getShape(String type) {
-                    if (type.equals("circle")) {
-                        return new Circle();
-                    }
-                    return new Rectangle();
-                }
-            }
-            ```
-            ''',
-            'language': 'java',
-            'difficulty': 'advanced'
-        }
-    ]
-}
-
 TYPESCRIPT_LESSONS = {
     'beginner': [
         {
@@ -1786,6 +1358,904 @@ let box: Box = { height: 10, width: 20 };
 ```
 ''',
             'language': 'typescript',
+            'difficulty': 'advanced'
+        }
+    ]
+}
+
+NEXTJS_LESSONS = {
+    'beginner': [
+        {
+            'title': 'Introduction to Next.js',
+            'content': '''
+Next.js is a React framework that enables server-side rendering, static site generation, and more.
+
+Key Features:
+- Server-side rendering (SSR)
+- Static site generation (SSG)
+- File-based routing
+- API routes
+- Built-in CSS support
+
+Getting Started:
+```bash
+npx create-next-app@latest my-app
+cd my-app
+npm run dev
+```
+
+Basic Project Structure:
+```
+my-app/
+  ├── pages/
+  │   ├── index.js
+  │   └── _app.js
+  ├── public/
+  ├── styles/
+  └── package.json
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'Pages and Routing',
+            'content': '''
+Next.js uses file-based routing. Files in the `pages` directory automatically become routes.
+
+Basic Routing:
+```jsx
+// pages/index.js
+export default function Home() {
+  return <h1>Home Page</h1>
+}
+
+// pages/about.js
+export default function About() {
+  return <h1>About Page</h1>
+}
+```
+
+Dynamic Routes:
+```jsx
+// pages/posts/[id].js
+export default function Post({ id }) {
+  return <h1>Post {id}</h1>
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'Data Fetching',
+            'content': '''
+Next.js provides multiple ways to fetch data:
+
+getStaticProps (SSG):
+```jsx
+export async function getStaticProps() {
+  const res = await fetch('https://api.example.com/data')
+  const data = await res.json()
+  return { props: { data } }
+}
+```
+
+getServerSideProps (SSR):
+```jsx
+export async function getServerSideProps() {
+  const res = await fetch('https://api.example.com/data')
+  const data = await res.json()
+  return { props: { data } }
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'Styling in Next.js',
+            'content': '''
+Next.js supports multiple styling solutions:
+
+CSS Modules:
+```css
+/* styles/Home.module.css */
+.title {
+  color: blue;
+}
+```
+
+```jsx
+import styles from '../styles/Home.module.css'
+
+export default function Home() {
+  return <h1 className={styles.title}>Hello</h1>
+}
+```
+
+Global CSS:
+```css
+/* styles/globals.css */
+body {
+  margin: 0;
+  padding: 0;
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'Image Component',
+            'content': '''
+Next.js provides an optimized Image component:
+
+```jsx
+import Image from 'next/image'
+
+export default function Gallery() {
+  return (
+    <Image
+      src="/profile.jpg"
+      alt="Profile"
+      width={500}
+      height={300}
+      priority
+    />
+  )
+}
+```
+
+Features:
+- Automatic optimization
+- Lazy loading
+- Responsive images
+- Prevents layout shift
+''',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'API Routes',
+            'content': '''
+Create API endpoints in the `pages/api` directory:
+
+```jsx
+// pages/api/hello.js
+export default function handler(req, res) {
+  res.status(200).json({ name: 'John Doe' })
+}
+```
+
+Usage:
+```jsx
+// pages/index.js
+export default function Home() {
+  const [data, setData] = useState(null)
+
+  useEffect(() => {
+    fetch('/api/hello')
+      .then(res => res.json())
+      .then(data => setData(data))
+  }, [])
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'Environment Variables',
+            'content': '''
+Next.js supports environment variables:
+
+```env
+# .env.local
+DATABASE_URL=your_database_url
+API_KEY=your_api_key
+```
+
+Usage:
+```jsx
+// pages/index.js
+export default function Home() {
+  return <div>API Key: {process.env.API_KEY}</div>
+}
+```
+
+Note: Only variables prefixed with `NEXT_PUBLIC_` are exposed to the browser.
+''',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'Layouts and Components',
+            'content': '''
+Create reusable layouts and components:
+
+```jsx
+// components/Layout.js
+export default function Layout({ children }) {
+  return (
+    <div>
+      <nav>Navigation</nav>
+      <main>{children}</main>
+      <footer>Footer</footer>
+    </div>
+  )
+}
+
+// pages/index.js
+import Layout from '../components/Layout'
+
+export default function Home() {
+  return (
+    <Layout>
+      <h1>Home Page</h1>
+    </Layout>
+  )
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'Dynamic Imports',
+            'content': '''
+Next.js supports dynamic imports for code splitting:
+
+```jsx
+import dynamic from 'next/dynamic'
+
+const DynamicComponent = dynamic(() => import('../components/Heavy'))
+
+export default function Home() {
+  return (
+    <div>
+      <DynamicComponent />
+    </div>
+  )
+}
+```
+
+Benefits:
+- Reduced initial bundle size
+- Improved performance
+- Lazy loading of components
+''',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        },
+        {
+            'title': 'Built-in Head Component',
+            'content': '''
+Next.js provides a Head component for managing document head:
+
+```jsx
+import Head from 'next/head'
+
+export default function Home() {
+  return (
+    <>
+      <Head>
+        <title>My Page</title>
+        <meta name="description" content="My page description" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main>Content</main>
+    </>
+  )
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'beginner'
+        }
+    ],
+    'intermediate': [
+        {
+            'title': 'Middleware',
+            'content': '''
+Next.js middleware allows you to run code before a request is completed:
+
+```jsx
+// middleware.js
+export function middleware(request) {
+  // Add custom headers
+  const response = NextResponse.next()
+  response.headers.set('x-custom-header', 'my-value')
+  
+  // Modify response
+  if (request.nextUrl.pathname.startsWith('/api')) {
+    response.headers.set('Cache-Control', 'no-store')
+  }
+  
+  return response
+}
+
+export const config = {
+  matcher: ['/api/:path*'],
+}
+```
+
+Use cases:
+- Authentication
+- Logging
+- URL rewriting
+- Headers modification
+''',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        },
+        {
+            'title': 'Authentication',
+            'content': '''
+Implement authentication in Next.js:
+
+```jsx
+// pages/api/auth/[...nextauth].js
+import NextAuth from 'next-auth'
+import Providers from 'next-auth/providers'
+
+export default NextAuth({
+  providers: [
+    Providers.Google({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+    }),
+  ],
+})
+
+// pages/index.js
+import { useSession } from 'next-auth/client'
+
+export default function Home() {
+  const [session] = useSession()
+  return session ? <div>Signed in</div> : <div>Not signed in</div>
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        },
+        {
+            'title': 'State Management',
+            'content': '''
+Implement state management in Next.js:
+
+```jsx
+// store/index.js
+import { create } from 'zustand'
+
+const useStore = create((set) => ({
+  count: 0,
+  increment: () => set((state) => ({ count: state.count + 1 })),
+}))
+
+// pages/index.js
+import useStore from '../store'
+
+export default function Home() {
+  const { count, increment } = useStore()
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>Increment</button>
+    </div>
+  )
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        },
+        {
+            'title': 'API Route Handlers',
+            'content': '''
+Create advanced API routes:
+
+```jsx
+// pages/api/users.js
+export default async function handler(req, res) {
+  switch (req.method) {
+    case 'GET':
+      // Handle GET request
+      const users = await getUsers()
+      res.status(200).json(users)
+      break
+    case 'POST':
+      // Handle POST request
+      const user = await createUser(req.body)
+      res.status(201).json(user)
+      break
+    default:
+      res.status(405).end()
+  }
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        },
+        {
+            'title': 'Custom Server',
+            'content': '''
+Create a custom server with Next.js:
+
+```jsx
+// server.js
+const express = require('express')
+const next = require('next')
+
+const dev = process.env.NODE_ENV !== 'production'
+const app = next({ dev })
+const handle = app.getRequestHandler()
+
+app.prepare().then(() => {
+  const server = express()
+  
+  // Custom middleware
+  server.use((req, res, next) => {
+    console.log('Request:', req.url)
+    next()
+})
+  
+  // Custom routes
+  server.get('/custom', (req, res) => {
+    res.send('Custom route')
+  })
+  
+  // Next.js handler
+  server.all('*', (req, res) => {
+    return handle(req, res)
+  })
+  
+  server.listen(3000)
+})
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        },
+        {
+            'title': 'Advanced Caching',
+            'content': '''
+Implement advanced caching strategies:
+
+```jsx
+// pages/api/data.js
+export default async function handler(req, res) {
+  // Set cache headers
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  )
+  
+  const data = await fetchData()
+  res.status(200).json(data)
+}
+
+// pages/index.js
+export async function getStaticProps() {
+  const data = await fetchData()
+  return {
+    props: { data },
+    revalidate: 60, // ISR
+  }
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        },
+        {
+            'title': 'WebSocket Integration',
+            'content': '''
+Integrate WebSocket with Next.js:
+
+```jsx
+// pages/api/socket.js
+import { Server } from 'socket.io'
+
+const ioHandler = (req, res) => {
+  if (!res.socket.server.io) {
+    const io = new Server(res.socket.server)
+    res.socket.server.io = io
+    
+    io.on('connection', socket => {
+      socket.on('message', msg => {
+        io.emit('message', msg)
+      })
+    })
+  }
+  res.end()
+}
+
+export default ioHandler
+
+// pages/index.js
+import { useEffect } from 'react'
+import io from 'socket.io-client'
+
+export default function Home() {
+  useEffect(() => {
+    const socket = io()
+    socket.on('message', msg => {
+      console.log(msg)
+  })
+    return () => socket.disconnect()
+  }, [])
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        },
+        {
+            'title': 'Advanced Authentication',
+            'content': '''
+Implement advanced authentication:
+
+```jsx
+// pages/api/auth/[...nextauth].js
+import NextAuth from 'next-auth'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import { compare } from 'bcrypt'
+
+export default NextAuth({
+  providers: [
+    CredentialsProvider({
+      name: 'Credentials',
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" }
+      },
+      async authorize(credentials) {
+        const user = await getUser(credentials.email)
+        if (user && await compare(credentials.password, user.password)) {
+          return user
+        }
+        return null
+      }
+    })
+  ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role
+      }
+      return token
+    },
+    async session({ session, token }) {
+      session.user.role = token.role
+      return session
+    }
+  }
+})
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'intermediate'
+        }
+    ],
+    'advanced': [
+        {
+            'title': 'Server Components',
+            'content': '''
+Implement React Server Components:
+
+```jsx
+// app/page.js
+import { Suspense } from 'react'
+import ServerComponent from './ServerComponent'
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ServerComponent />
+    </Suspense>
+  )
+}
+
+// app/ServerComponent.js
+export default async function ServerComponent() {
+  const data = await fetchData()
+  return <div>{data}</div>
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'Edge Runtime',
+            'content': '''
+Use Edge Runtime for faster responses:
+
+```jsx
+// pages/api/edge.js
+export const config = {
+  runtime: 'edge',
+}
+
+export default function handler(req) {
+  return new Response('Hello from Edge!', {
+    headers: { 'content-type': 'text/plain' },
+  })
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'Streaming SSR',
+            'content': '''
+Implement streaming server-side rendering:
+
+```jsx
+// app/page.js
+import { Suspense } from 'react'
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <StreamingComponent />
+    </Suspense>
+  )
+}
+
+// app/StreamingComponent.js
+export default async function StreamingComponent() {
+  const data = await fetchData()
+  return <div>{data}</div>
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'Custom Document',
+            'content': '''
+Customize the HTML document:
+
+```jsx
+// pages/_document.js
+import { Html, Head, Main, NextScript } from 'next/document'
+
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  )
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'Custom App',
+            'content': '''
+Customize the App component:
+
+```jsx
+// pages/_app.js
+import { SessionProvider } from 'next-auth/react'
+
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+  return (
+    <SessionProvider session={session}>
+      <Component {...pageProps} />
+    </SessionProvider>
+  )
+}
+
+export default MyApp
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'API Middleware',
+            'content': '''
+Create custom API middleware:
+
+```jsx
+// middleware.js
+import { NextResponse } from 'next/server'
+
+export function middleware(request) {
+  const response = NextResponse.next()
+  
+  // Add custom headers
+  response.headers.set('x-custom-header', 'value')
+  
+  // Modify response
+  if (request.nextUrl.pathname.startsWith('/api')) {
+    response.headers.set('Cache-Control', 'no-store')
+  }
+  
+  return response
+}
+
+export const config = {
+  matcher: ['/api/:path*'],
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'Custom Server',
+            'content': '''
+Create a custom server with advanced features:
+
+```jsx
+// server.js
+const express = require('express')
+const next = require('next')
+
+const dev = process.env.NODE_ENV !== 'production'
+const app = next({ dev })
+const handle = app.getRequestHandler()
+
+app.prepare().then(() => {
+  const server = express()
+  
+  // Custom middleware
+  server.use((req, res, next) => {
+    console.log('Request:', req.url)
+    next()
+  })
+  
+  // Custom routes
+  server.get('/custom', (req, res) => {
+    res.send('Custom route')
+  })
+  
+  // Next.js handler
+  server.all('*', (req, res) => {
+    return handle(req, res)
+  })
+  
+  server.listen(3000)
+})
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'Advanced Caching',
+            'content': '''
+Implement advanced caching strategies:
+
+```jsx
+// pages/api/data.js
+export default async function handler(req, res) {
+  // Set cache headers
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  )
+  
+  const data = await fetchData()
+  res.status(200).json(data)
+}
+
+// pages/index.js
+export async function getStaticProps() {
+  const data = await fetchData()
+  return {
+    props: { data },
+    revalidate: 60, // ISR
+  }
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'WebSocket Integration',
+            'content': '''
+Integrate WebSocket with Next.js:
+
+```jsx
+// pages/api/socket.js
+import { Server } from 'socket.io'
+
+const ioHandler = (req, res) => {
+  if (!res.socket.server.io) {
+    const io = new Server(res.socket.server)
+    res.socket.server.io = io
+    
+    io.on('connection', socket => {
+      socket.on('message', msg => {
+        io.emit('message', msg)
+      })
+    })
+  }
+  res.end()
+}
+
+export default ioHandler
+
+// pages/index.js
+import { useEffect } from 'react'
+import io from 'socket.io-client'
+
+export default function Home() {
+  useEffect(() => {
+    const socket = io()
+    socket.on('message', msg => {
+      console.log(msg)
+    })
+    return () => socket.disconnect()
+  }, [])
+}
+```
+''',
+            'language': 'nextjs',
+            'difficulty': 'advanced'
+        },
+        {
+            'title': 'Advanced Authentication',
+            'content': '''
+Implement advanced authentication:
+
+```jsx
+// pages/api/auth/[...nextauth].js
+import NextAuth from 'next-auth'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import { compare } from 'bcrypt'
+
+export default NextAuth({
+  providers: [
+    CredentialsProvider({
+      name: 'Credentials',
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" }
+      },
+      async authorize(credentials) {
+        const user = await getUser(credentials.email)
+        if (user && await compare(credentials.password, user.password)) {
+          return user
+        }
+        return null
+      }
+    })
+  ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role
+      }
+      return token
+    },
+    async session({ session, token }) {
+      session.user.role = token.role
+      return session
+    }
+  }
+})
+```
+''',
+            'language': 'nextjs',
             'difficulty': 'advanced'
         }
     ]
