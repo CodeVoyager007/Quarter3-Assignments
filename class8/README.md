@@ -1,86 +1,36 @@
-# 🚀 CodeMentor
-**Interactive Programming Learning Platform**
+# 🚀 CodeMentor – Learn. Code. Grow.
+
+CodeMentor is an interactive learning platform for programmers built with **Streamlit** and designed using **Object-Oriented Programming (OOP)** principles. It merges **education**, **practice**, and **career prep** into one seamless, responsive application.
+
+🔗 [Live App](https://codementor-by-ayesha-mughal.streamlit.app/)
 
 ---
 
-## 🌟 Overview
+## 🎯 Key Features
 
-**CodeMentor** is your all-in-one interactive platform to master programming!  
-Learn Python, JavaScript, and TypeScript through hands-on lessons, real coding challenges, and quizzes — all in a beautiful, intuitive interface.
-
----
-
-## ✨ Features
-
-- 📚 **Lessons**: Step-by-step guides for Python, JavaScript, and TypeScript
-- 🏆 **Challenges**: Practice problems with instant feedback and hints
-- ❓ **Quizzes**: Test your knowledge at every level
-- 📈 **Progress Tracking**: See your growth as you learn
-- 📰 **Daily Tech Blogs**: Stay updated with the latest in tech
-- 💻 **Code Playground**: Write and run code in your browser
-- 🎯 **Interview Prep**: Practice with real-world interview questions
-- 🌐 **Free Courses**: Curated list of top free programming courses
+- 📚 Lessons: Python, JavaScript, TypeScript, and Next.js with step-by-step guidance
+- 💻 Code Playground: Supports 29+ languages with real-time execution (via Piston API)
+- 🏆 Challenges & Quizzes: Language-specific, with hints and instant feedback
+- 📊 Progress Dashboard: Track scores, completion rates, and achievements
+- 🎯 Interview Prep: Practice real-world questions with tracking
+- 📰 Daily Tech Blogs: Stay updated via TechCrunch integration
+- 🆓 Free Courses: Curated from Harvard & freeCodeCamp
+- 🌗 Responsive UI: Tab navigation, dark/light mode, and mobile friendly
 
 ---
 
-## 🚀 Quick Start
+## 🔍 CodeMentor vs Traditional Learning Platforms
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/CodeVoyager/class6.git
-   cd codementor
-   ```
-
-2. **Install dependencies**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
-
-3. **Run the app**
-   ```bash
-   streamlit run src/codementor/main.py
-   ```
-
----
+| Feature                        | Traditional Platforms      | CodeMentor (This App)         |
+|-------------------------------|----------------------------|-------------------------------|
+| ❌ Single Language Focus      | Usually 1-2 languages       | ✅ Supports 29+ Languages     |
+| ❌ Only Lessons OR Practice   | Often just theory/practice | ✅ Combines Lessons + Practice + Interview Prep |
+| ❌ No Real-Time Execution     | Limited interactivity       | ✅ Real-Time Code Execution via API |
+| ❌ No Progress Dashboard      | Static or missing tracking | ✅ Full Progress & Achievement System |
+| ❌ Requires Login             | Mandatory sign-ups          | ✅ No Login – Session-Based Saving |
+| ❌ No Resource Integration    | Lacks external sources      | ✅ Daily Tech Blogs + Free Courses |
+| ❌ Limited Customization      | Rigid flow & interface      | ✅ Tab-Based, Responsive UI (Dark/Light Mode) |
+| ❌ Not Student-Focused        | Generic audience            | ✅ Built by a Student, for Students 💖 |
 
 
 
----
-
-## 🧑‍💻 How to Use
-
-1. Launch the app with the command above.
-2. Choose your language and difficulty.
-3. Explore lessons, solve challenges, and take quizzes.
-4. Track your progress and try out the code playground.
-5. Check out daily blogs and free courses for extra learning!
-
----
-
-## 🤝 Contributing
-
-We welcome contributions!  
-- Add new lessons, challenges, or quizzes
-- Suggest new features or improvements
-- Report bugs or issues
-
-**To contribute:**
-1. Fork the repo
-2. Create a new branch (`git checkout -b feature/your-feature`)
-3. Commit your changes
-4. Open a pull request
-
----
-
-## 📬 Contact
-
-Questions, suggestions, or feedback?  
-Open an issue or reach out at [ayeshamughal2162@gmail.com](mailto:ayeshamughal2162.com)
-
----
-
-
-
-> **Happy Coding! 🚀** 
