@@ -1,6 +1,5 @@
 import streamlit as st
 from data.progress import UserProgress
-import plotly.express as px
 import plotly.graph_objects as go
 from typing import Dict
 
