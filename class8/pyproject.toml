@@ -13,6 +13,7 @@ dependencies = [
     "black>=25.1.0",
     "plotly>=6.0.1",
     "jsbeautifier>=1.15.4",
+    "pyperclip>=1.8.2",
 ]
 
 [build-system]
