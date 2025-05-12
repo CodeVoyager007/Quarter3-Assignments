@@ -1,7 +1,7 @@
 import streamlit as st
 from data.progress import UserProgress
-import plotly.graph_objects as go
 from typing import Dict
+import pandas as pd
 
 class ProgressDashboard:
     def __init__(self):
@@ -35,31 +35,21 @@ class ProgressDashboard:
     def get_achievement_description(self, achievement: str) -> str:
         return self.achievement_descriptions.get(achievement, 'Achievement unlocked!')
 
-    def create_progress_chart(self, stats: Dict) -> go.Figure:
+    def create_progress_chart(self, stats: Dict):
         languages = ['Python', 'JavaScript', 'TypeScript', 'Next.js']
         completed_lessons = [
             len(stats['completed_lessons'].get(lang.lower(), set()))
             for lang in languages
         ]
         
-        fig = go.Figure(data=[
-            go.Bar(
-                name='Completed Lessons',
-                x=languages,
-                y=completed_lessons,
-                marker_color='#4CAF50'
-            )
-        ])
+        # Create a DataFrame for the chart
+        df = pd.DataFrame({
+            'Language': languages,
+            'Completed Lessons': completed_lessons
+        })
         
-        fig.update_layout(
-            title='Lessons Completed by Language',
-            xaxis_title='Language',
-            yaxis_title='Number of Lessons',
-            template='plotly_white',
-            height=400
-        )
-        
-        return fig
+        # Create the bar chart
+        st.bar_chart(df.set_index('Language'))
 
     def display_main_stats(self, stats: Dict):
         col1, col2, col3 = st.columns(3)
@@ -159,7 +149,8 @@ class ProgressDashboard:
         self.display_main_stats(stats)
         
         # Display progress chart
-        st.plotly_chart(self.create_progress_chart(user_progress.__dict__), use_container_width=True)
+        st.subheader("Lessons Completed by Language")
+        self.create_progress_chart(user_progress.__dict__)
         
         # Display achievements
         self.display_achievements(stats)
