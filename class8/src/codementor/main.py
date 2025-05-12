@@ -109,6 +109,7 @@ if __name__ == "__main__":
         <div style='text-align: center; font-size: 16px; margin-top: 30px;'>
             Coded with 💗 by <b>Ayesha Mughal</b><br>
             <a href="mailto:ayeshamughal216@gmail.com">ayeshamughal216@gmail.com</a>
+            <p>New Lessons Coming Soon!</p>
         </div>
         """,
         unsafe_allow_html=True
