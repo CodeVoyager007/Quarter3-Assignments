@@ -2,7 +2,13 @@ import streamlit as st
 import requests
 import json
 from datetime import datetime
-import pyperclip  # Add this import for clipboard functionality
+
+# Try to import pyperclip, but don't fail if it's not available
+try:
+    import pyperclip
+    HAS_PYPERCLIP = True
+except ImportError:
+    HAS_PYPERCLIP = False
 
 class CodePlayground:
     def __init__(self):
@@ -76,6 +82,8 @@ class CodePlayground:
             return f"Error: {e}"
 
     def copy_to_clipboard(self, text: str) -> bool:
+        if not HAS_PYPERCLIP:
+            return False
         try:
             pyperclip.copy(text)
             return True
@@ -100,7 +108,7 @@ class CodePlayground:
                 if self.copy_to_clipboard(code):
                     st.success("Code copied to clipboard!")
                 else:
-                    st.error("Failed to copy code. Please try again.")
+                    st.warning("Copy to clipboard is not available in this environment. You can manually copy the code.")
 
     def render_snippets(self):
         st.subheader("💾 Saved Snippets")
