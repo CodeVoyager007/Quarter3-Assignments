@@ -53,17 +53,33 @@ with st.sidebar.expander("Advanced Options"):
         index=0
     )
     
-    blur_background = st.checkbox("Blur Background", value=False)
+    blur_background = st.checkbox("Blur Background", value=True)
     
     # Resolution selection based on "pro" status
     is_pro = st.checkbox("Pro Version", value=False)
     resolution = (1080, 1080) if is_pro else (720, 720)
 
+    # Custom Unsplash Query
+    custom_query = st.text_input(
+        "Custom Background Theme",
+        placeholder="e.g., nature,abstract,dark",
+        help="Comma-separated keywords for Unsplash background"
+    )
+
 # Image Upload
-uploaded_file = st.sidebar.file_uploader("Upload Background Image (Optional)", type=["png", "jpg", "jpeg"])
+st.sidebar.markdown("---")
+st.sidebar.markdown("### Background Options")
+background_source = st.sidebar.radio(
+    "Choose Background Source",
+    ["Unsplash Random", "Upload Image"],
+    index=0
+)
+
 background_image = None
-if uploaded_file is not None:
-    background_image = Image.open(uploaded_file)
+if background_source == "Upload Image":
+    uploaded_file = st.sidebar.file_uploader("Upload Background Image", type=["png", "jpg", "jpeg"])
+    if uploaded_file is not None:
+        background_image = Image.open(uploaded_file)
 
 # Generate Button
 if st.sidebar.button("Generate Poster", type="primary"):
@@ -77,6 +93,10 @@ if st.sidebar.button("Generate Poster", type="primary"):
                 height=resolution[1],
                 theme=theme_options[selected_theme]
             )
+            
+            # If custom query is provided, update the theme's query
+            if custom_query and background_source == "Unsplash Random":
+                poster.theme.unsplash_query = custom_query
             
             # Generate image
             result = poster.generate(
@@ -93,7 +113,7 @@ if st.sidebar.button("Generate Poster", type="primary"):
             poster.save(result, buf)
             
             # Display preview
-            st.image(buf, caption="Your Quote Poster", use_column_width=True)
+            st.image(buf, caption="Your Quote Poster", use_container_width=True)
             
             # Download button
             st.download_button(

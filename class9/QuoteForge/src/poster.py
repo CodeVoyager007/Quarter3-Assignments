@@ -3,13 +3,71 @@ from pathlib import Path
 import io
 import os
 import requests
-from typing import Optional, Tuple, Literal
+from typing import Optional, Tuple, Literal, List
 from dataclasses import dataclass
 import numpy as np
+import textwrap
 
 GOOGLE_FONTS_API_KEY = "AIzaSyAvxH7Zf0G6Mhmnqx9k5K8UFnDEjemC_40"
+UNSPLASH_API_KEY = "93RAiDPJfQ_p_YZY5UeoG-QXEoouD-zr4Nugi8O2Cts"
 FONTS_DIR = Path(__file__).parent / "fonts"
 FONTS_DIR.mkdir(exist_ok=True)
+
+def get_random_unsplash_image(query: str = "nature,abstract,texture") -> Optional[Image.Image]:
+    """Get a random image from Unsplash API."""
+    try:
+        headers = {
+            "Authorization": f"Client-ID {UNSPLASH_API_KEY}"
+        }
+        
+        # Clean and format the query
+        formatted_query = query.replace(" ", "").replace(",", "+")
+        
+        url = f"https://api.unsplash.com/photos/random?query={formatted_query}&orientation=squarish"
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        
+        data = response.json()
+        image_url = data['urls']['regular']
+        
+        # Download the image
+        image_response = requests.get(image_url)
+        image_response.raise_for_status()
+        
+        # Open the image from bytes
+        image = Image.open(io.BytesIO(image_response.content))
+        return image
+    except Exception as e:
+        print(f"Error fetching Unsplash image: {str(e)}")
+        return None
+
+def wrap_text(text: str, font: ImageFont.FreeTypeFont, max_width: int) -> List[str]:
+    """Wrap text to fit within a given width."""
+    words = text.split()
+    lines = []
+    current_line = []
+    
+    for word in words:
+        # Try adding the word to the current line
+        test_line = current_line + [word]
+        test_text = ' '.join(test_line)
+        bbox = font.getbbox(test_text)
+        width = bbox[2] - bbox[0]
+        
+        if width <= max_width:
+            current_line = test_line
+        else:
+            if current_line:  # If there are words in the current line
+                lines.append(' '.join(current_line))
+                current_line = [word]
+            else:  # If the word itself is longer than max_width
+                lines.append(word)
+                current_line = []
+    
+    if current_line:
+        lines.append(' '.join(current_line))
+    
+    return lines
 
 def download_google_font(font_family: str) -> Optional[str]:
     """Download a font from Google Fonts API and return the path to the font file."""
@@ -51,6 +109,7 @@ class ThemeConfig:
     font_family: str
     font_size: int
     text_color: Tuple[int, int, int]
+    unsplash_query: str
     background_color: Optional[Tuple[int, int, int]] = None
     background_gradient: Optional[Tuple[Tuple[int, int, int], Tuple[int, int, int]]] = None
 
@@ -58,7 +117,8 @@ class PosterThemes:
     MINIMAL = ThemeConfig(
         font_family="Roboto",
         font_size=60,
-        text_color=(0, 0, 0),
+        text_color=(255, 255, 255),
+        unsplash_query="minimal,white,clean",
         background_color=(255, 255, 255)
     )
     
@@ -66,6 +126,7 @@ class PosterThemes:
         font_family="Playfair Display",
         font_size=65,
         text_color=(255, 255, 255),
+        unsplash_query="elegant,luxury,dark",
         background_gradient=((48, 16, 255), (100, 115, 255))
     )
     
@@ -73,6 +134,7 @@ class PosterThemes:
         font_family="Oswald",
         font_size=70,
         text_color=(255, 255, 255),
+        unsplash_query="bold,vibrant,colorful",
         background_gradient=((255, 59, 48), (255, 149, 0))
     )
 
@@ -111,10 +173,21 @@ class Poster:
             left = (background_image.width - self.width)/2
             top = (background_image.height - self.height)/2
             self._image = background_image.crop((left, top, left + self.width, top + self.height))
-        elif self.theme.background_gradient:
-            self._image = self._create_gradient_background(*self.theme.background_gradient)
         else:
-            self._image = Image.new('RGB', (self.width, self.height), self.theme.background_color or (255, 255, 255))
+            # Try to get an Unsplash image first
+            unsplash_image = get_random_unsplash_image(self.theme.unsplash_query)
+            if unsplash_image:
+                # Convert to RGB if necessary
+                if unsplash_image.mode in ('RGBA', 'LA') or (unsplash_image.mode == 'P' and 'transparency' in unsplash_image.info):
+                    unsplash_image = unsplash_image.convert('RGB')
+                self._init_image(unsplash_image)
+                return
+            
+            # Fallback to gradient or solid color
+            if self.theme.background_gradient:
+                self._image = self._create_gradient_background(*self.theme.background_gradient)
+            else:
+                self._image = Image.new('RGB', (self.width, self.height), self.theme.background_color or (255, 255, 255))
         
         self._draw = ImageDraw.Draw(self._image)
 
@@ -137,38 +210,56 @@ class Poster:
         """Generate the quote poster."""
         self._init_image(background_image)
         
-        if blur_background and background_image:
+        if blur_background:
             self._image = self._image.filter(ImageFilter.GaussianBlur(5))
+
+        # Add a dark overlay to ensure text readability
+        overlay = Image.new('RGBA', (self.width, self.height), (0, 0, 0, 127))
+        self._image = Image.alpha_composite(self._image.convert('RGBA'), overlay)
+        self._image = self._image.convert('RGB')
+        self._draw = ImageDraw.Draw(self._image)
 
         # Load fonts
         quote_font = self._get_font(self.theme.font_size)
         watermark_font = self._get_font(20)
 
-        # Calculate text position
-        quote_bbox = self._draw.textbbox((0, 0), quote, font=quote_font)
+        # Calculate maximum width for text (80% of image width)
+        max_text_width = int(self.width * 0.8)
+
+        # Wrap quote text
+        quote_lines = wrap_text(quote, quote_font, max_text_width)
+        
+        # Calculate total height needed
+        line_spacing = int(self.theme.font_size * 0.3)  # 30% of font size for spacing
+        quote_height = len(quote_lines) * (self.theme.font_size + line_spacing)
         author_bbox = self._draw.textbbox((0, 0), f"- {author}", font=quote_font)
+        author_height = author_bbox[3] - author_bbox[1]
         
-        quote_width = quote_bbox[2] - quote_bbox[0]
-        quote_height = quote_bbox[3] - quote_bbox[1]
-        author_width = author_bbox[2] - author_bbox[0]
+        total_height = quote_height + author_height + 40  # 40px padding between quote and author
         
-        total_height = quote_height + author_bbox[3] + 20  # 20px padding between quote and author
-        
+        # Calculate vertical position
         if text_position == "top":
-            y = self.height * 0.2
+            y = self.height * 0.15
         elif text_position == "bottom":
-            y = self.height * 0.6
+            y = self.height * 0.85 - total_height
         else:  # middle
             y = (self.height - total_height) / 2
 
-        # Draw quote
-        x = (self.width - quote_width) / 2
-        self._draw.text((x, y), quote, font=quote_font, fill=self.theme.text_color)
+        # Draw quote lines
+        for line in quote_lines:
+            bbox = self._draw.textbbox((0, 0), line, font=quote_font)
+            line_width = bbox[2] - bbox[0]
+            x = (self.width - line_width) / 2
+            self._draw.text((x, y), line, font=quote_font, fill=self.theme.text_color)
+            y += self.theme.font_size + line_spacing
         
         # Draw author
+        author_text = f"- {author}"
+        author_bbox = self._draw.textbbox((0, 0), author_text, font=quote_font)
+        author_width = author_bbox[2] - author_bbox[0]
         x = (self.width - author_width) / 2
-        y += quote_height + 20
-        self._draw.text((x, y), f"- {author}", font=quote_font, fill=self.theme.text_color)
+        y += 20  # Add some padding before author
+        self._draw.text((x, y), author_text, font=quote_font, fill=self.theme.text_color)
         
         if watermark:
             watermark_text = "QuoteForge"
