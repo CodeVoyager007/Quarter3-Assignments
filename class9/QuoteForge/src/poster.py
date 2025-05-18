@@ -164,7 +164,7 @@ class Poster:
             b = int(color1[2] + (color2[2] - color1[2]) * y / self.height)
             array[y, :] = [r, g, b]
         return Image.fromarray(array)
-    def _init_image(self, background_image: Optional[Image.Image] = None):
+    def _init_image(self, background_image: Optional[Image.Image] = None, unsplash_category: Optional[str] = None):
         if background_image:
             ratio = max(self.width/background_image.width, self.height/background_image.height)
             new_size = (int(background_image.width * ratio), int(background_image.height * ratio))
@@ -175,7 +175,9 @@ class Poster:
             self._image = background_image.crop((left, top, left + self.width, top + self.height))
         else:
             try:
-                image_source = ImageSource.from_unsplash(self.theme.unsplash_query)
+                # Use category if provided, otherwise use theme's default query
+                query = unsplash_category.lower() if unsplash_category else self.theme.unsplash_query
+                image_source = ImageSource.from_unsplash(query)
                 if image_source:
                     image = Image.open(io.BytesIO(image_source.content))
                     if image.mode in ('RGBA', 'LA') or (image.mode == 'P' and 'transparency' in image.info):
@@ -199,9 +201,10 @@ class Poster:
         background_image: Optional[Image.Image] = None,
         text_position: Literal["top", "middle", "bottom"] = "middle",
         blur_background: bool = False,
-        watermark: bool = False
+        watermark: bool = False,
+        unsplash_category: Optional[str] = None
     ) -> Image.Image:
-        self._init_image(background_image)
+        self._init_image(background_image, unsplash_category)
         
         if blur_background:
             self._image = self._image.filter(ImageFilter.GaussianBlur(5))

@@ -179,6 +179,24 @@ def main_app():
         uploaded_file = st.sidebar.file_uploader("Upload Background Image", type=["png", "jpg", "jpeg"])
         if uploaded_file is not None:
             background_image = Image.open(uploaded_file)
+    elif background_source == "Unsplash Random":
+        unsplash_categories = [
+            "Nature",
+            "Architecture",
+            "Minimal",
+            "Abstract",
+            "Texture",
+            "Space",
+            "City",
+            "Ocean",
+            "Mountain",
+            "Forest"
+        ]
+        selected_category = st.sidebar.selectbox(
+            "Select Image Category",
+            unsplash_categories,
+            index=0
+        )
 
     # Generate Button
     if st.sidebar.button("Generate Poster", type="primary"):
@@ -200,7 +218,8 @@ def main_app():
                     background_image=background_image,
                     text_position=text_position,
                     blur_background=blur_background,
-                    watermark=not is_pro
+                    watermark=not is_pro,
+                    unsplash_category=selected_category if background_source == "Unsplash Random" else None
                 )
                 
                 # Save to buffer
