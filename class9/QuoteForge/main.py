@@ -1,6 +1,7 @@
 import streamlit as st
 from PIL import Image
 import io
+import base64
 from src.poster import Poster, PosterThemes
 from src.auth import Auth
 from src.payment import Payment
@@ -10,33 +11,91 @@ from pathlib import Path
 auth = Auth()
 payment = Payment()
 
+# Load and encode logo image
+logo_path = Path(__file__).parent / "assets" / "QuoteForge.png"
+if logo_path.exists():
+    with open(logo_path, "rb") as f:
+        logo_base64 = base64.b64encode(f.read()).decode()
+else:
+    logo_base64 = ""
+
 st.set_page_config(
     page_title="QuoteForge - Shape Words Into Art",
     page_icon="🎨",
-    layout="centered"
+    layout="centered",
+    initial_sidebar_state="expanded"
 )
 
-# Custom CSS
+# Custom CSS with dark theme
 st.markdown("""
 <style>
+    /* Dark theme colors */
+    :root {
+        --background-color: #0A0F1C;
+        --text-color: #D1D5DB;
+        --accent-color: #00E1FF;
+        --secondary-bg: #1E293B;
+    }
+
     .stApp {
+        background-color: var(--background-color);
+        color: var(--text-color);
         max-width: 1200px;
         margin: 0 auto;
     }
+    
     .main {
         padding: 2rem;
     }
-    h1 {
-        color: #1E88E5;
+    
+    h1, h2, h3 {
+        color: var(--text-color) !important;
     }
-    .css-1d391kg {
-        padding-top: 1rem;
+    
+    .stButton>button {
+        background-color: var(--accent-color);
+        color: var(--background-color);
+        border: none;
+        font-weight: bold;
+    }
+    
+    .stTextInput>div>div>input, .stTextArea>div>div>textarea {
+        background-color: var(--secondary-bg);
+        color: var(--text-color);
+        border: 1px solid var(--accent-color);
+    }
+    
+    .stSelectbox>div>div {
+        background-color: var(--secondary-bg);
+        color: var(--text-color);
+    }
+    
+    .sidebar .sidebar-content {
+        background-color: var(--secondary-bg);
+    }
+    
+    /* Custom header with logo */
+    .header-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .header-container img {
+        width: 50px;
+        height: auto;
     }
 </style>
 """, unsafe_allow_html=True)
 
 def login_page():
-    st.title("🎨 QuoteForge")
+    st.markdown(f"""
+        <div class="header-container">
+            <img src="data:image/png;base64,{logo_base64}" alt="QuoteForge Logo"/>
+            <h1>QuoteForge</h1>
+        </div>
+    """, unsafe_allow_html=True)
     st.subheader("Login to Create Beautiful Quotes")
     
     with st.form("login_form"):
@@ -56,15 +115,20 @@ def login_page():
     st.markdown("---")
     st.markdown("""
     ### Demo Accounts:
-    - Free User: demo@quoteforge.com / demo123
-    - Pro User: pro@quoteforge.com / pro123
+    - Free User: demo@quoteforge.com / demouser2314
+    - Pro User: pro@quoteforge.com / prouser2134
     """)
 
 def main_app():
-    # App Header
+    # App Header with Logo
     col1, col2 = st.columns([3, 1])
     with col1:
-        st.title("🎨 QuoteForge")
+        st.markdown(f"""
+            <div class="header-container">
+                <img src="data:image/png;base64,{logo_base64}" alt="QuoteForge Logo"/>
+                <h1>QuoteForge</h1>
+            </div>
+        """, unsafe_allow_html=True)
         st.subheader("Shape Words Into Art")
     with col2:
         if st.button("Logout"):
@@ -85,7 +149,6 @@ def main_app():
         "Bold": PosterThemes.BOLD
     }
     selected_theme = st.sidebar.selectbox("Choose Theme", list(theme_options.keys()))
-
     # Advanced Options
     with st.sidebar.expander("Advanced Options"):
         text_position = st.selectbox(
@@ -102,7 +165,6 @@ def main_app():
             st.info("👉 Upgrade to Pro for HD quality and no watermarks!")
         
         resolution = (1080, 1080) if is_pro else (720, 720)
-
     # Background Options
     st.sidebar.markdown("---")
     st.sidebar.markdown("### Background Options")

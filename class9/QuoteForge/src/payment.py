@@ -17,10 +17,8 @@ PRODUCTS = {
         "period": "year"
     }
 }
-
 class Payment:
     def __init__(self):
-        # In production, initialize with actual Stripe keys
         pass
     
     def get_products(self) -> Dict[str, Any]:
@@ -42,7 +40,6 @@ class Payment:
     
     def process_payment(self, session_id: str) -> bool:
         """Simulate processing a successful payment."""
-        # In production, verify the payment with Stripe
         return True
     
     def display_pricing(self) -> None:
@@ -51,7 +48,6 @@ class Payment:
         st.markdown("### Unlock Premium Features")
         
         col1, col2 = st.columns(2)
-        
         with col1:
             st.markdown("""
             #### Monthly Plan
