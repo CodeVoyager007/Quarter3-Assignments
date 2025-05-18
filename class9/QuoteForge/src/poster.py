@@ -17,14 +17,22 @@ def get_random_unsplash_image(query: str = "nature,abstract,texture") -> Optiona
     """Get a random image from Unsplash API."""
     try:
         headers = {
-            "Authorization": f"Client-ID {UNSPLASH_API_KEY}"
+            "Authorization": f"Client-ID {UNSPLASH_API_KEY}",
+            "Accept-Version": "v1"
         }
         
         # Clean and format the query
-        formatted_query = query.replace(" ", "").replace(",", "+")
+        formatted_query = query.replace(" ", "+")
         
-        url = f"https://api.unsplash.com/photos/random?query={formatted_query}&orientation=squarish"
-        response = requests.get(url, headers=headers)
+        # Make the API request
+        url = "https://api.unsplash.com/photos/random"
+        params = {
+            "query": formatted_query,
+            "orientation": "squarish",
+            "content_filter": "high"
+        }
+        
+        response = requests.get(url, headers=headers, params=params)
         response.raise_for_status()
         
         data = response.json()
@@ -34,8 +42,10 @@ def get_random_unsplash_image(query: str = "nature,abstract,texture") -> Optiona
         image_response = requests.get(image_url)
         image_response.raise_for_status()
         
-        # Open the image from bytes
+        # Open the image from bytes and convert to RGB
         image = Image.open(io.BytesIO(image_response.content))
+        if image.mode in ('RGBA', 'LA') or (image.mode == 'P' and 'transparency' in image.info):
+            image = image.convert('RGB')
         return image
     except Exception as e:
         print(f"Error fetching Unsplash image: {str(e)}")
@@ -118,7 +128,7 @@ class PosterThemes:
         font_family="Roboto",
         font_size=60,
         text_color=(255, 255, 255),
-        unsplash_query="minimal,white,clean",
+        unsplash_query="minimal white background",
         background_color=(255, 255, 255)
     )
     
@@ -126,7 +136,7 @@ class PosterThemes:
         font_family="Playfair Display",
         font_size=65,
         text_color=(255, 255, 255),
-        unsplash_query="elegant,luxury,dark",
+        unsplash_query="elegant dark background",
         background_gradient=((48, 16, 255), (100, 115, 255))
     )
     
@@ -134,7 +144,7 @@ class PosterThemes:
         font_family="Oswald",
         font_size=70,
         text_color=(255, 255, 255),
-        unsplash_query="bold,vibrant,colorful",
+        unsplash_query="vibrant colorful background",
         background_gradient=((255, 59, 48), (255, 149, 0))
     )
 
