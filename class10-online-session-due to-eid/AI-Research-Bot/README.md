@@ -81,14 +81,19 @@ This project successfully implements all the required topics from the assignment
    source .venv/bin/activate
    ```
 
-3. Install dependencies using UV:
+3. Install dependencies:
    ```bash
-   uv add -r requirements.txt
+   # Using UV (recommended)
+   uv pip install -r requirements.txt
+   
+   # Or using pip
+   pip install -r requirements.txt
    ```
 
 4. Set up environment variables:
    ```bash
-   cd  .env
+   # Copy the example env file
+   cp .env.example .env
    # Edit .env with your API keys
    ```
 
@@ -97,6 +102,18 @@ This project successfully implements all the required topics from the assignment
    streamlit run main.py
    ```
 
+### Deployment
+
+For deploying to Streamlit Cloud:
+
+1. Make sure your repository is public
+2. Connect your GitHub repository to Streamlit Cloud
+3. Set the following environment variables in Streamlit Cloud:
+   - `OPENROUTER_API_KEY`
+   - `LITELLM_API_KEY` (if using LiteLLM)
+   - Any other required API keys
+
+The application will automatically detect the `pyproject.toml` and install dependencies using UV.
 
 ## Contributing
 
