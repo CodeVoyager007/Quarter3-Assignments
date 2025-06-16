@@ -6,23 +6,22 @@ Provides a wrapper around LiteLLM for OpenAI-compatible API calls.
 import os
 from typing import Dict, Any, List, Optional
 from litellm import completion
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
+import streamlit as st
 
 class LiteLLMConfig:
     """Configuration class for LiteLLM."""
     
     def __init__(self):
-        self.api_key = os.getenv("OPENROUTER_API_KEY")
+        # Use Streamlit secrets instead of environment variables
+        secrets = st.secrets["litellm"]
+        self.api_key = secrets["OPENROUTER_API_KEY"]
         if not self.api_key:
-            raise ValueError("OPENROUTER_API_KEY not found in environment variables")
+            raise ValueError("OPENROUTER_API_KEY not found in Streamlit secrets")
             
-        self.model_name = os.getenv("LITELLM_MODEL_NAME", "openai/gpt-3.5-turbo")
-        self.api_base = os.getenv("LITELLM_API_BASE", "https://openrouter.ai/api/v1")
-        self.max_tokens = int(os.getenv("MAX_TOKENS", "1000"))
-        self.temperature = float(os.getenv("TEMPERATURE", "0.7"))
+        self.model_name = secrets.get("LITELLM_MODEL_NAME", "openai/gpt-3.5-turbo")
+        self.api_base = secrets.get("LITELLM_API_BASE", "https://openrouter.ai/api/v1")
+        self.max_tokens = int(secrets.get("MAX_TOKENS", "1000"))
+        self.temperature = float(secrets.get("TEMPERATURE", "0.7"))
 
 class LiteLLMClient:
     """Client for interacting with LiteLLM."""
