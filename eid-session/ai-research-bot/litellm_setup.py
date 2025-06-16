@@ -20,10 +20,15 @@ class LiteLLMConfig:
     """Configuration class for LiteLLM."""
     
     def __init__(self):
-        self.api_key = os.getenv("OPENROUTER_API_KEY")
-        logger.info(f"API Key found: {'Yes' if self.api_key else 'No'}")
-        if not self.api_key:
+        # Ensure API key is properly formatted
+        api_key = os.getenv("OPENROUTER_API_KEY", "").strip()
+        if not api_key:
             raise ValueError("OPENROUTER_API_KEY not found in environment variables")
+        
+        
+        self.api_key = api_key.strip('"\'')
+        logger.info(f"API Key found: {'Yes' if self.api_key else 'No'}")
+        logger.info(f"API Key length: {len(self.api_key)}")
             
         self.model_name = os.getenv("LITELLM_MODEL_NAME", "openai/gpt-3.5-turbo")
         self.api_base = os.getenv("LITELLM_API_BASE", "https://openrouter.ai/api/v1")
@@ -59,17 +64,21 @@ class LiteLLMClient:
             Dict containing the completion response
         """
         try:
-            # Set up the API key and base URL for OpenRouter
+           
             kwargs["api_key"] = self.config.api_key
             kwargs["api_base"] = self.config.api_base
             
             # Add required headers for OpenRouter
             kwargs["headers"] = {
-                "HTTP-Referer": "https://github.com/yourusername/AI-Research-Bot",  # Replace with your repo
-                "X-Title": "AI Research Bot"
+                "HTTP-Referer": "https://github.com/yourusername/AI-Research-Bot",
+                "X-Title": "AI Research Bot",
+                "Authorization": f"Bearer {self.config.api_key}"  # Explicitly set Authorization header
             }
             
             logger.info(f"Making API call to {self.config.api_base} with model {model or self.config.model_name}")
+            
+            # Set the model provider explicitly
+            kwargs["provider"] = "openrouter"
             
             response = completion(
                 model=model or self.config.model_name,
