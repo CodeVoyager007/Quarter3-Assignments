@@ -108,12 +108,31 @@ For deploying to Streamlit Cloud:
 
 1. Make sure your repository is public
 2. Connect your GitHub repository to Streamlit Cloud
-3. Set the following environment variables in Streamlit Cloud:
-   - `OPENROUTER_API_KEY`
-   - `LITELLM_API_KEY` (if using LiteLLM)
-   - Any other required API keys
+3. In Streamlit Cloud settings:
+   - Set the main file path to: `class10-online-session-due to-eid/AI-Research-Bot/main.py`
+   - Add the following environment variables:
+     ```
+     OPENROUTER_API_KEY=your_openrouter_api_key
+     LITELLM_API_KEY=your_litellm_api_key
+     ```
+   - Set Python version to 3.11
+   - Enable "Always rerun" option
 
-The application will automatically detect the `pyproject.toml` and install dependencies using UV.
+4. The application uses multiple dependency files for compatibility:
+   - `requirements.txt` - Standard Python dependencies
+   - `packages.txt` - Streamlit Cloud specific dependencies
+   - `pyproject.toml` - Project metadata and build configuration
+
+5. After deployment:
+   - Check the logs for any installation issues
+   - Verify that all dependencies are installed correctly
+   - Test each feature to ensure proper functionality
+
+Note: If you encounter any deployment issues:
+1. Check the Streamlit Cloud logs for specific error messages
+2. Verify that all API keys are set correctly
+3. Ensure the main file path is correct
+4. Try clearing the cache and redeploying
 
 ## Contributing
 
