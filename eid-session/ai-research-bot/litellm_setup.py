@@ -7,6 +7,11 @@ import os
 from typing import Dict, Any, List, Optional
 from litellm import completion
 from dotenv import load_dotenv
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Load environment variables
 load_dotenv()
@@ -16,6 +21,7 @@ class LiteLLMConfig:
     
     def __init__(self):
         self.api_key = os.getenv("OPENROUTER_API_KEY")
+        logger.info(f"API Key found: {'Yes' if self.api_key else 'No'}")
         if not self.api_key:
             raise ValueError("OPENROUTER_API_KEY not found in environment variables")
             
@@ -23,6 +29,7 @@ class LiteLLMConfig:
         self.api_base = os.getenv("LITELLM_API_BASE", "https://openrouter.ai/api/v1")
         self.max_tokens = int(os.getenv("MAX_TOKENS", "1000"))
         self.temperature = float(os.getenv("TEMPERATURE", "0.7"))
+        logger.info(f"Configuration loaded - Model: {self.model_name}, API Base: {self.api_base}")
 
 class LiteLLMClient:
     """Client for interacting with LiteLLM."""
@@ -62,6 +69,8 @@ class LiteLLMClient:
                 "X-Title": "AI Research Bot"
             }
             
+            logger.info(f"Making API call to {self.config.api_base} with model {model or self.config.model_name}")
+            
             response = completion(
                 model=model or self.config.model_name,
                 messages=messages,
@@ -71,6 +80,7 @@ class LiteLLMClient:
             )
             return response
         except Exception as e:
+            logger.error(f"Error in generate_completion: {str(e)}")
             raise Exception(f"Error calling LiteLLM: {str(e)}")
 
 # Create a singleton instance
