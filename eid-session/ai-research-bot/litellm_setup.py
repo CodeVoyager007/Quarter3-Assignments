@@ -68,11 +68,10 @@ class LiteLLMClient:
             kwargs["api_key"] = self.config.api_key
             kwargs["api_base"] = self.config.api_base
             
-            # Add required headers for OpenRouter
             kwargs["headers"] = {
-                "HTTP-Referer": "https://github.com/yourusername/AI-Research-Bot",
+                "HTTP-Referer": "https://github.com/CodeVoyager007/AI-Research-Bot",
                 "X-Title": "AI Research Bot",
-                "Authorization": f"Bearer {self.config.api_key}"  # Explicitly set Authorization header
+                "Authorization": f"Bearer {self.config.api_key}"  
             }
             
             logger.info(f"Making API call to {self.config.api_base} with model {model or self.config.model_name}")
