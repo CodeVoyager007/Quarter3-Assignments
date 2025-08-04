@@ -1,0 +1,132 @@
+🎓 Console-Based Support Agent System - Usage Guide
+====================================================
+
+📋 PREREQUISITES:
+1. Python 3.10 or higher
+2. UV package manager
+3. Gemini API key from Google AI Studio
+
+🚀 SETUP INSTRUCTIONS:
+======================
+
+1. GET YOUR GEMINI API KEY:
+   - Go to https://makersuite.google.com/app/apikey
+   - Create a new API key
+   - Copy the API key
+
+2. SET UP ENVIRONMENT VARIABLES:
+   Create a .env file in the project root:
+   ```
+   GEMINI_API_KEY=your_gemini_api_key_here
+   ```
+
+3. INSTALL DEPENDENCIES:
+   ```bash
+   uv sync
+   ```
+
+4. RUN THE SYSTEM:
+   ```bash
+   uv run main.py
+   ```
+
+📖 HOW TO USE:
+==============
+
+1. START THE SYSTEM:
+   - Run: uv run main.py
+   - The system will show available features
+
+2. INTERACT WITH AGENTS:
+   - Type your query in natural language
+   - The triage agent will route you to the appropriate specialist
+   - Each agent has specific tools and capabilities
+
+3. EXAMPLE QUERIES:
+   
+   Billing Queries:
+   - "I want a refund for my premium subscription"
+   - "My name is John and I need to update my billing information"
+   - "I'm a premium user and I want to check my account status"
+
+   Technical Queries:
+   - "I need to restart my system service"
+   - "My application is running slow, can you help?"
+   - "There's a technical issue with my account"
+
+   General Queries:
+   - "What services do you offer?"
+   - "How can I get help?"
+   - "I'm new here, can you guide me?"
+
+4. EXIT THE SYSTEM:
+   - Type: quit, exit, or bye
+   - Or press Ctrl+C
+
+🔧 FEATURES IMPLEMENTED:
+========================
+
+✅ REQUIRED CONCEPTS:
+• Agents: 4 agents (Triage + 3 specialized)
+• Tools: Each agent has tools with dynamic is_enabled logic
+• is_enabled(): Tools are conditionally enabled based on context
+• Handoffs: Triage agent routes to specialized agents
+• Context: User info passed between agents (name, premium status, issue type)
+• CLI Interface: Console-based input/output
+
+✅ DYNAMIC TOOL GATING:
+• refund() - only enabled for premium users
+• restart_service() - only enabled for technical issues
+• check_account() - available to all agents
+• update_billing() - available to billing agent
+
+✅ AGENT ARCHITECTURE:
+• Triage Agent: Routes queries and extracts context
+• Billing Agent: Handles refunds, payments, billing updates
+• Technical Agent: Handles service restarts, troubleshooting
+• General Agent: Handles general questions and guidance
+
+✅ CONTEXT MANAGEMENT:
+• User name extraction
+• Premium status detection
+• Issue type classification
+• Session data storage
+
+🎯 BONUS FEATURES:
+==================
+• Rich console output with colored panels
+• Real-time context display
+• Professional error handling
+• Clean exit handling
+
+🔍 TROUBLESHOOTING:
+===================
+
+1. API KEY ISSUES:
+   - Ensure GEMINI_API_KEY is set in .env file
+   - Check that the API key is valid and has credits
+
+2. DEPENDENCY ISSUES:
+   - Run: uv sync to reinstall dependencies
+   - Check Python version: python --version
+
+3. RUNTIME ERRORS:
+   - Check console output for specific error messages
+   - Ensure all files are in the correct directory structure
+
+📁 PROJECT STRUCTURE:
+=====================
+console-based-agent/
+├── main.py                 # Main system entry point
+├── models.py              # Pydantic models for context
+├── tools.py               # Tool implementations
+├── agents/
+│   ├── triage_agent.py    # Routing agent
+│   ├── billing_agent.py   # Billing specialist
+│   ├── technical_agent.py # Technical specialist
+│   └── general_agent.py   # General support
+├── pyproject.toml         # Project configuration
+├── .env                   # Environment variables (create this)
+└── USAGE_GUIDE.txt       # This file
+
+🎉 ENJOY YOUR CONSOLE-BASED SUPPORT AGENT SYSTEM! 
